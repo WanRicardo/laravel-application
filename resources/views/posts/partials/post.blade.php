@@ -14,6 +14,8 @@
     </h3>
 
     <x-updated action="" date="{{ $post->created_at->diffForHumans() }}" name="{{ $post->user->name }}" />
+        
+    <x-tags :tags="$post->tags" />
 
     @if ($post->comments_count)
         <p>{{ $post->comments_count }} comments</p>

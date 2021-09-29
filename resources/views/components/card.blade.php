@@ -8,12 +8,18 @@
     <ul class="list-group list-group-flush">
         @if (is_a($items, 'Illuminate\Support\Collection'))
             @foreach ($items as $item)
-                <li class="list-group-item">
-                    {{ $item }}
-                </li>
+                @if (gettype($item) == "object")
+                    <li class="list-group-item">
+                        <a href="{{ route('posts.show', ['post' => $item->id]) }}">
+                            {{ $item->title }}
+                        </a>
+                    </li>
+                @else
+                    <li class="list-group-item">
+                        {{ $item }}
+                    </li>
+                @endif
             @endforeach
-        @else
-            {{ $items }}
         @endif
     </ul>
 </div>
