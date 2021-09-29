@@ -11,15 +11,16 @@
     @unless($post['is_new'])
     <div>It is an old post using unless</div>    
     @endunless  --}}
-    <h1>{{ $post->title }}</h1>
-    <p>{{ $post->content }}</p>
-    <p>Added {{ $post->created_at->diffForHumans() }}</p>
+    <h1>
+        {{ $post->title }}
+        <x-badge type='' message='Brand new Post!' show='{{ now()->diffInMinutes($post->created_at) < 20 }}' />
+    </h1>
 
-    @if(now()->diffInMinutes($post->created_at) < 20)
-        @badge(['type' => 'primary'])
-            Brand new Post!
-        @endbadge
-    @endif
+    <p>{{ $post->content }}</p>
+    <x-updated action="" date="{{ $post->created_at->diffForHumans() }}" name="{{ $post->user->name }}" />
+    <x-updated action="Updated" date="{{ $post->updated_at->diffForHumans() }}" name="" />
+
+    <p>Currently read by {{ $counter }} people</p>
 
     <h4>Comments</h4>
 
@@ -27,9 +28,7 @@
         <p>
             {{ $comment->content }},
         </p>
-        <p class="text-muted">
-            added {{ $comment->created_at->diffForHumans() }}
-        </p>
+        <x-updated action="" date="{{ $comment->created_at->diffForHumans() }}" name="" />
     @empty
         <p>No comments yet!</p>
     @endforelse
