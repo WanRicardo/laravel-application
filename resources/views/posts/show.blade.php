@@ -19,8 +19,8 @@
             </h1>
 
             <p>{{ $post->content }}</p>
-            <x-updated action="" date="{{ $post->created_at->diffForHumans() }}" name="{{ $post->user->name }}" />
-            <x-updated action="Updated" date="{{ $post->updated_at->diffForHumans() }}" name="" />
+            <x-updated action="" :date="$post->created_at" name="{{ $post->user->name }}" />
+            <x-updated action="Updated" :date="$post->updated_at" name="" />
 
             <x-tags :tags="$post->tags" />
 
@@ -28,11 +28,13 @@
 
             <h4>Comments</h4>
 
+            @include('comments.form')
+
             @forelse ($post->comments as $comment)
                 <p>
                     {{ $comment->content }},
                 </p>
-                <x-updated action="" date="{{ $comment->created_at->diffForHumans() }}" name="" />
+                <x-updated action="" :date="$comment->created_at" name="{{ $comment->user->name }}" />
             @empty
                 <p>No comments yet!</p>
             @endforelse

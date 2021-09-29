@@ -13,7 +13,7 @@
         @endif
     </h3>
 
-    <x-updated action="" date="{{ $post->created_at->diffForHumans() }}" name="{{ $post->user->name }}" />
+    <x-updated action="" :date="$post->created_at" name="{{ $post->user->name }}" />
         
     <x-tags :tags="$post->tags" />
 
