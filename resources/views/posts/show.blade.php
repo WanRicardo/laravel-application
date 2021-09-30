@@ -43,16 +43,9 @@
 
             <h4>Comments</h4>
 
-            @include('comments.form')
+            <x-comment-form :route="route('posts.comments.store', ['post' => $post->id])"/>
 
-            @forelse ($post->comments as $comment)
-                <p>
-                    {{ $comment->content }},
-                </p>
-                <x-updated action="" :date="$comment->created_at" name="{{ $comment->user->name }}" userId="" />
-            @empty
-                <p>No comments yet!</p>
-            @endforelse
+            <x-comment-list :comments="$post->comments"/>
 
             {{--  @isset($post['has_comments'])
                 <div>The post has some comments... using isset directive</div>
