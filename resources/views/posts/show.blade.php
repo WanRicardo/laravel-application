@@ -34,8 +34,8 @@
             {{--  <img src="{{ asset($post->image->path) }}" alt="">  --}}
             {{--  <img src="{{ $post->image->url() }}" alt="">  --}}
 
-            <x-updated action="" :date="$post->created_at" name="{{ $post->user->name }}" />
-            <x-updated action="Updated" :date="$post->updated_at" name="" />
+            <x-updated action="" :date="$post->created_at" name="{{ $post->user->name }}" userId="" />
+            <x-updated action="Updated" :date="$post->updated_at" name="" userId="" />
 
             <x-tags :tags="$post->tags" />
 
@@ -49,7 +49,7 @@
                 <p>
                     {{ $comment->content }},
                 </p>
-                <x-updated action="" :date="$comment->created_at" name="{{ $comment->user->name }}" />
+                <x-updated action="" :date="$comment->created_at" name="{{ $comment->user->name }}" userId="" />
             @empty
                 <p>No comments yet!</p>
             @endforelse

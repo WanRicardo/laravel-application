@@ -9,16 +9,18 @@ class Updated extends Component
     public $action;
     public $date;
     public $name;
+    public $userId;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($action, $date, $name)
+    public function __construct($action, $date, $name, $userId)
     {
         $this->action = $action;
         $this->date = $date;
         $this->name = $name;
+        $this->userId = $userId;
     }
 
     /**

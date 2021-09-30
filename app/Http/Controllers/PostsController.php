@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
+// [
+//     'show' => 'view',
+//     'create' => 'create',
+//     'store' => 'create',
+//     'edit' => 'update',
+//     'update' => 'update',
+//     'destroy' => 'delete',
+// ]
+
 class PostsController extends Controller
 {
     public function __construct()
@@ -113,7 +122,7 @@ class PostsController extends Controller
         if($storePost->hasFile('thumbnail')) {
             $path = $storePost->file('thumbnail')->store('thumbnails');
             $post->image()->save(
-                Image::create(['path' => $path])
+                Image::make(['path' => $path])
             );
             // dump($file);
             // dump($file->getClientMimeType());
@@ -243,7 +252,7 @@ class PostsController extends Controller
             } else {
 
                 $post->image()->save(
-                    Image::create(['path' => $path])
+                    Image::make(['path' => $path])
                 );
             }
         }
