@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BlogPostPosted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePost;
 use App\Models\BlogPost;
@@ -140,6 +141,8 @@ class PostsController extends Controller
             // dump(Storage::url($name1));
         }
         // die;
+
+        event(new BlogPostPosted($post));
 
         $storePost->session()->flash('status', 'The blog post was created!');
 

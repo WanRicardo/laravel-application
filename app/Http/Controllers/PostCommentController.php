@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentPosted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreComment;
 use App\Jobs\NotifyUsersPostWasCommented;
@@ -32,11 +33,13 @@ class PostCommentController extends Controller
         //     new CommentPostedMarkdown($comment)
         // );
 
-        ThrottledMail::dispatch(new CommentPostedMarkdown($comment), $post->user)
-            ->onQueue('low');
+        event(new CommentPosted($comment));
 
-        NotifyUsersPostWasCommented::dispatch($comment)
-            ->onQueue('high');
+        // ThrottledMail::dispatch(new CommentPostedMarkdown($comment), $post->user)
+        //     ->onQueue('low');
+
+        // NotifyUsersPostWasCommented::dispatch($comment)
+        //     ->onQueue('high');
 
         // $when = now()->addMinutes(1);
 
