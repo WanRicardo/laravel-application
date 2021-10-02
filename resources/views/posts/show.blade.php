@@ -39,9 +39,10 @@
 
             <x-tags :tags="$post->tags" />
 
-            <p>Currently read by {{ $counter }} people</p>
+            {{--  <p>Currently read by {{ $counter }} people</p>  --}}
+            <p>{{ trans_choice('messages.people.reading', $counter) }}</p>
 
-            <h4>Comments</h4>
+            <h4>{{ __('Comments') }}</h4>
 
             <x-comment-form :route="route('posts.comments.store', ['post' => $post->id])"/>
 
