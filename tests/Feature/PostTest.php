@@ -10,6 +10,13 @@ use Tests\TestCase;
 class PostTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function testSomething()
+    {
+        $response = $this->get('/');
+
+        $response->assertStatus(200);
+    }
     
     // public function testNoBlogPostsWhenNothingInDatabase()
     // {

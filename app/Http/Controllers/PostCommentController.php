@@ -10,6 +10,7 @@ use App\Jobs\ThrottledMail;
 use App\Mail\CommentPostedMarkdown;
 use App\Models\BlogPost;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Resources\Comment as CommentResource;
 
 class PostCommentController extends Controller
 {
@@ -20,7 +21,8 @@ class PostCommentController extends Controller
 
     public function index(BlogPost $post)
     {
-        return $post->comments()->with('user')->get();
+        return CommentResource::collection($post->comments()->with('user')->get());
+        // return $post->comments()->with('user')->get();
     }
 
     public function store(BlogPost $post, StoreComment $request)
